@@ -1,22 +1,55 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
+import React, { useState } from "react";
+import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
 function FormularioCadastro() {
+  const [nome, setNome] = useState("")
+  const [sobrenome, setSobrenome] = useState("")
+
   return (
-    <form>
-      <label>Nome</label>
-      <input type="text" />
+    <form 
+      onSubmit={(event) => {
+        event.preventDefault()
+      }}
+    >
+      <TextField
+        value={nome}
+        onChange={(event) => {
+          setNome(event.targe.value)
+        }}
+        id="nome"
+        label="Nome"
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <TextField
+        value={sobrenome}
+        onChange={(event) => {
+          setSobrenome(event.targe.value)
+        }}
+        id="sobrenome"
+        label="Sobrenome"
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <TextField
+        id="CPF"
+        label="CPF"
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
 
-      <label>Sobrenome</label>
-      <input type="text" />
+      <FormControlLabel
+        label="Promoções"
+        control={<Switch name="promocoes" defaultChecked color="primary" />}
+      />
 
-      <label>CPF</label>
-      <input type="text" />
-
-      <label>Promoções</label>
-      <input type="checkbox" />
-      <label>Novidades</label>
-      <input type="checkbox" />
+      <FormControlLabel 
+        label="Novidades"
+        control={<Switch name="novidades" defaultChecked color="primary" />}
+      />      
 
       <Button type="submit" variant="contained" color="primary">
         Cadastrar
@@ -26,3 +59,11 @@ function FormularioCadastro() {
 }
 
 export default FormularioCadastro;
+
+/** validação, n linha abaixo do onChange:
+ * let tmpCPF = event.targe.value
+ * if (tmpCPF.length >= 11){
+ *  tmpCPF = tmpCPF.subtr(0, 11)
+ * }
+ *  setCPF(tmpCPF)
+ */
